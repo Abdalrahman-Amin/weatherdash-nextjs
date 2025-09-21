@@ -14,7 +14,7 @@ export function ThemeWrapper({ children }: ThemeWrapperProps) {
       <div
         style={{
           position: "fixed",
-          top: "var(--spacing-md)",
+          bottom: "var(--spacing-md)",
           right: "var(--spacing-md)",
           zIndex: 100,
         }}

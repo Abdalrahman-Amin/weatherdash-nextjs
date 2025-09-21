@@ -1,0 +1,64 @@
+.searchBarContainer {
+  /* Dimensions and spacing from design specs */
+  width: calc(100% - (var(--spacing-xl) * 2)); /* 311px on 375px screen */
+  height: var(--spacing-xl); /* 48px */
+  margin: var(--spacing-lg) auto 0 auto; /* Top margin and auto horizontal for centering */
+  position: relative; /* For icon positioning */
+  display: flex;
+  align-items: center;
+
+  /* Glass morphism styling */
+  background-color: var(--light-bg-card);
+  border: 1px solid var(--light-border-color);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  transition: border-color 0.2s var(--ease-out-quad),
+    box-shadow 0.2s var(--ease-out-quad),
+    background-color 0.2s var(--ease-out-quad);
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--spacing-md); /* 16px */
+  width: var(--spacing-lg); /* 24px */
+  height: var(--spacing-lg); /* 24px */
+  color: var(--light-text-muted);
+  transition: color 0.2s var(--ease-out-quad);
+}
+
+.searchInput {
+  flex-grow: 1; /* Take up remaining space */
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md); /* 16px */
+  color: var(--light-text-primary);
+  padding-left: calc(
+    var(--spacing-md) + var(--spacing-lg) + var(--spacing-xs)
+  ); /* Icon width + left padding + a little extra */
+  padding-right: var(--spacing-md);
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: none; /* Custom focus via container or using :focus-visible */
+  transition: color 0.2s var(--ease-out-quad);
+}
+
+/* Placeholder styling */
+.searchInput::placeholder {
+  color: var(--light-text-muted);
+  font-weight: var(--font-weight-regular);
+  transition: color 0.2s var(--ease-out-quad);
+}
+
+/* Focus states (applying to the container for the glass effect) */
+.searchBarContainer:focus-within {
+  /* When any element inside gets focus */
+  border-color: var(--color-blue-500);
+  box-shadow: 0 0 0 3px rgba(var(--color-blue-500), 0.2);
+}
+
+/* Adjust icon color on focus */
+.searchBarContainer:focus-within .searchIcon {
+  color: var(--color-blue-500);
+}
