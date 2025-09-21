@@ -1,0 +1,31 @@
+.toggleButton {
+  /* Use our design tokens for styling */
+  background-color: var(--light-bg-secondary);
+  color: var(--light-text-primary);
+  border: 1px solid var(--light-border-color);
+  border-radius: var(--radius-full); /* Pill shape */
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease-out-quad),
+    color 0.2s var(--ease-out-quad), border-color 0.2s var(--ease-out-quad),
+    box-shadow 0.2s var(--ease-out-quad);
+  /* Desktop hover effect */
+  outline: none; /* Remove default focus outline, use :focus-visible instead */
+}
+
+@media (min-width: 1024px) {
+  .toggleButton:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.toggleButton:active {
+  transform: scale(0.98);
+}
+
+.toggleButton:focus-visible {
+  outline: 2px solid var(--color-blue-500);
+  outline-offset: 3px;
+}
