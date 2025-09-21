@@ -1,26 +1,275 @@
-@import "tailwindcss";
+/*
+|--------------------------------------------------------------------------
+| WeatherDash Design System - Global Styles and Design Tokens
+|--------------------------------------------------------------------------
+|
+| This file contains the foundational design tokens for the WeatherDash
+| mobile application, encompassing color palettes, theme mappings,
+| spacing, typography, border radius, and shadows.
+|
+*/
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Reset basic styles */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  color: var(--light-text-primary);
+  background-color: var(--light-bg-primary);
+  transition: background-color 0.4s var(--ease-in-out-quad),
+    color 0.4s var(--ease-in-out-quad);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Accessibility: Reduced Motion Preference
+|--------------------------------------------------------------------------
+| Automatically disables animations for users who prefer less motion.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+|--------------------------------------------------------------------------
+| Easing Functions (for Animations)
+|--------------------------------------------------------------------------
+*/
+:root {
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-back: cubic-bezier(
+    0.175,
+    0.885,
+    0.32,
+    1.275
+  ); /* For bouncy effects */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Color Palette - Base Colors
+|--------------------------------------------------------------------------
+*/
+:root {
+  /* Primary Blue */
+  --color-blue-50: #e0f2fe; /* Very Light Blue */
+  --color-blue-100: #bfdbfe; /* Light Blue */
+  --color-blue-300: #60a5fa; /* Medium Light Blue */
+  --color-blue-500: #3b82f6; /* Primary Blue */
+  --color-blue-700: #1d4ed8; /* Dark Blue */
+  --color-blue-900: #1e3a8a; /* Very Dark Blue */ /* Added for dark theme gradient */
+
+  /* Secondary Emerald Green */
+  --color-emerald-50: #ecfdf5; /* Very Light Emerald */
+  --color-emerald-100: #d1fae5; /* Light Emerald */
+  --color-emerald-300: #6ee7b7; /* Medium Light Emerald */
+  --color-emerald-500: #10b981; /* Primary Emerald */
+  --color-emerald-700: #047857; /* Dark Emerald */
+
+  /* Accent Amber Yellow */
+  --color-amber-50: #fffbeb; /* Very Light Amber */
+  --color-amber-100: #fef3c7; /* Light Amber */
+  --color-amber-300: #fcd34d; /* Medium Light Amber */
+  --color-amber-500: #f59e0b; /* Primary Amber */
+  --color-amber-700: #b45309; /* Dark Amber */
+
+  /* Neutral Grays */
+  --color-gray-50: #f9fafb; /* Very Light Gray (Off-White) */
+  --color-gray-100: #f3f4f6; /* Light Gray */
+  --color-gray-200: #e5e7eb; /* Muted Light Gray */
+  --color-gray-400: #9ca3af; /* Medium Gray */
+  --color-gray-500: #6b7280; /* Primary Gray (Subtle Text) */
+  --color-gray-700: #374151; /* Dark Gray (Body Text) */
+  --color-gray-800: #1f2937; /* Very Dark Gray (Headings) */
+  --color-gray-900: #111827; /* Blackish Gray (Deepest Text/Background) */
+
+  /* Semantic Colors */
+  --color-success: var(--color-emerald-500);
+  --color-warning: var(--color-amber-500);
+  --color-error: #ef4444; /* Red for errors */
+
+  /*
+  |--------------------------------------------------------------------------
+  | Theme Mappings - Light Theme
+  |--------------------------------------------------------------------------
+  */
+  --light-bg-primary: var(--color-gray-50);
+  --light-bg-secondary: var(--color-gray-100);
+  --light-bg-card: rgba(255, 255, 255, 0.6); /* Glass effect base */
+  --light-bg-gradient-start: var(--color-blue-100);
+  --light-bg-gradient-end: var(--color-blue-300);
+
+  --light-text-primary: var(--color-gray-900);
+  --light-text-secondary: var(--color-gray-700);
+  --light-text-muted: var(--color-gray-500);
+  --light-text-accent: var(--color-blue-700);
+
+  --light-border-color: rgba(255, 255, 255, 0.2); /* Subtle card borders */
+  --light-shadow-color: rgba(0, 0, 0, 0.1); /* Subtle shadows */
+
+  /*
+  |--------------------------------------------------------------------------
+  | Theme Mappings - Dark Theme
+  |--------------------------------------------------------------------------
+  */
+  --dark-bg-primary: var(--color-gray-900);
+  --dark-bg-secondary: var(--color-gray-800);
+  --dark-bg-card: rgba(27, 39, 53, 0.6); /* Adjusted for dark mode glass */
+  --dark-bg-gradient-start: var(--color-blue-700);
+  --dark-bg-gradient-end: var(--color-blue-900); /* A very dark blue */
+
+  --dark-text-primary: var(--color-gray-50);
+  --dark-text-secondary: var(--color-gray-200);
+  --dark-text-muted: var(--color-gray-400);
+  --dark-text-accent: var(--color-blue-300);
+
+  --dark-border-color: rgba(255, 255, 255, 0.05);
+  --dark-shadow-color: rgba(0, 0, 0, 0.3);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Spacing Scale
+  |--------------------------------------------------------------------------
+  | Multiples of 4px for consistent padding and margins.
+  */
+  --spacing-xxs: 4px;
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-xxxl: 64px;
+
+  /*
+  |--------------------------------------------------------------------------
+  | Border Radius Values
+  |--------------------------------------------------------------------------
+  */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px; /* For pill shapes */
+
+  /*
+  |--------------------------------------------------------------------------
+  | Typography Scale
+  |--------------------------------------------------------------------------
+  | Using 'Inter' as a modern, clean sans-serif font.
+  */
+  --font-family-primary: "Inter", sans-serif;
+  --font-family-display: "Inter", sans-serif; /* Can be different if needed */
+
+  /* Font Sizes */
+  --font-size-xxs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-display: 48px; /* For large temperature display */
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+
+  /*
+  |--------------------------------------------------------------------------
+  | Shadow Definitions (For Glass Morphism)
+  |--------------------------------------------------------------------------
+  | These will be applied to the glass elements. The actual glass effect
+  | relies on `backdrop-filter: blur()`, so these shadows add subtle depth.
+  */
+  --shadow-xs: 0px 1px 2px var(--light-shadow-color); /* Extra small shadow */
+  --shadow-sm: 0px 1px 3px var(--light-shadow-color),
+    0px 1px 2px var(--light-shadow-color);
+  --shadow-md: 0px 4px 6px var(--light-shadow-color),
+    0px 2px 4px var(--light-shadow-color);
+  --shadow-lg: 0px 10px 15px var(--light-shadow-color),
+    0px 4px 6px var(--light-shadow-color);
+  --shadow-xl: 0px 20px 25px var(--light-shadow-color),
+    0px 8px 10px var(--light-shadow-color);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Dark Theme Overrides
+|--------------------------------------------------------------------------
+| These variables are applied when the `dark-theme` class is active on
+| the `html` or `body` element.
+*/
+html.dark-theme,
+body.dark-theme {
+  /* Apply to html or body for global theme switch */
+  --light-bg-primary: var(--dark-bg-primary);
+  --light-bg-secondary: var(--dark-bg-secondary);
+  --light-bg-card: var(--dark-bg-card);
+  --light-bg-gradient-start: var(--dark-bg-gradient-start);
+  --light-bg-gradient-end: var(--dark-bg-gradient-end);
+
+  --light-text-primary: var(--dark-text-primary);
+  --light-text-secondary: var(--dark-text-secondary);
+  --light-text-muted: var(--dark-text-muted);
+  --light-text-accent: var(--dark-text-accent);
+
+  --light-border-color: var(--dark-border-color);
+  --light-shadow-color: var(--dark-shadow-color);
+
+  --shadow-xs: 0px 1px 2px var(--dark-shadow-color);
+  --shadow-sm: 0px 1px 3px var(--dark-shadow-color),
+    0px 1px 2px var(--dark-shadow-color);
+  --shadow-md: 0px 4px 6px var(--dark-shadow-color),
+    0px 2px 4px var(--dark-shadow-color);
+  --shadow-lg: 0px 10px 15px var(--dark-shadow-color),
+    0px 4px 6px var(--dark-shadow-color);
+  --shadow-xl: 0px 20px 25px var(--dark-shadow-color),
+    0px 8px 10px var(--dark-shadow-color);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Accessibility: Focus Indicator Styling
+|--------------------------------------------------------------------------
+| Ensures keyboard focus is always clearly visible.
+*/
+:focus-visible {
+  outline: 2px solid var(--color-blue-500); /* Primary blue outline */
+  outline-offset: 3px; /* Space between element and outline */
+  border-radius: var(
+    --radius-sm
+  ); /* Match element's border-radius where appropriate */
+  /* Add a subtle box-shadow for extra visibility if needed */
+  box-shadow: 0 0 0 1px rgba(var(--color-blue-500), 0.2);
 }
